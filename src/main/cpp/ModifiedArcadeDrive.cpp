@@ -5,8 +5,45 @@
 
 using namespace frc;
 
-void ModifiedArcadeDrive::ModArcadeDrive(double xSpeed, double zRotation)
+void ModifiedArcadeDrive::ModArcadeDrive(double xSpeed, double zRotation, double coeffA)
 {
+   if(abs(xSpeed) < m_deadband)
+   {
+      xSpeed = 0;
+   }
+   else
+   {
+      xSpeed = std::copysign(coeffA*xSpeed*xSpeed, xSpeed);
+   }
+
+   if(abs(zRotation) < m_deadband)
+   {
+      zRotation = 0;
+   }
+   else
+   {
+      zRotation = std::copysign(coeffA*xSpeed*xSpeed, xSpeed);
+   }
+
+   if (xSpeed > 1)
+   {
+      xSpeed = 1;
+   }
+   else if (xSpeed < -1)
+   {
+      xSpeed = -1;
+   }
+
+   if (zRotation > 1)
+   {
+      zRotation = 1;
+   }
+   else if (zRotation < -1)
+   {
+      zRotation = -1;
+   }
+
+   /*
    if(abs(xSpeed) < m_deadband)
    {
       xSpeed = 0;
@@ -32,6 +69,7 @@ void ModifiedArcadeDrive::ModArcadeDrive(double xSpeed, double zRotation)
    {
       zRotation = std::copysign(m_highSpeedControlMultiplier * abs(zRotation) + 1 - m_highSpeedControlMultiplier, zRotation);
    }
+   */
 
    ArcadeDrive(xSpeed, zRotation);
 }

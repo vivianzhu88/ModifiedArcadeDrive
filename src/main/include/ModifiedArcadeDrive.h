@@ -7,6 +7,7 @@
 
 #pragma once
 #include <thread>
+#include <rev/CANSparkMax.h>
 
 class ModifiedArcadeDrive {
   public:
@@ -16,12 +17,12 @@ class ModifiedArcadeDrive {
    double m_thresholdPercentage = 0.5;
 
   public:
-    void ModArcadeDrive(double xSpeed, double zRotation);
+    void ModArcadeDrive(double xSpeed, double zRotation, double coeffA);
     void ArcadeDrive(double xSpeed, double zRotation);
 
   private:
     rev::CANSparkMax *m_leftMotor, *m_rightMotor;
-    
+
   private:
     virtual void setLeftMotor(double value);
     virtual void setRightMotor(double value);
