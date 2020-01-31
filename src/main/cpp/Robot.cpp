@@ -9,10 +9,23 @@
 #include <iostream>
 #include <frc/smartdashboard/SmartDashboard.h>
 
+enum JoystickAxes {L_X_AXIS = 0, L_Y_AXIS = 1, L_TRIGGER = 2, R_TRIGGER = 3, R_X_AXIS = 4, R_Y_AXIS = 5};
+
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+
+  m_leftMotorFront->SetSmartCurrentLimit(40)
+  m_rightMotorFront->SetSmartCurrentLimit(40)
+  m_leftMotorBack->SetSmartCurrentLimit(40)
+  m_rightMotorBack->SetSmartCurrentLimit(40)
+
+  m_leftMotorFront->SetSecondaryCurrentLimit(60, 50);
+  m_rightMotorFront->SetSecondaryCurrentLimit(60, 50);
+  m_leftMotorBack->SetSecondaryCurrentLimit(60, 50);
+  m_rightMotorBack->SetSecondaryCurrentLimit(60, 50);
+
 }
 
 /**
@@ -23,7 +36,9 @@ void Robot::RobotInit() {
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {}
+void Robot::RobotPeriodic() {
+  myRobot->ModifiedAcadeDrive(driverStick->GetRawAxis(JoystickAxes::L_Y_AXIS), -1.0 * driverStick->GetRawAxis(JoystickAxes::R_X_AXIS), );
+}
 
 /**
  * This autonomous (along with the chooser code above) shows how to select
@@ -59,7 +74,9 @@ void Robot::AutonomousPeriodic() {
 
 void Robot::TeleopInit() {}
 
-void Robot::TeleopPeriodic() {}
+void Robot::TeleopPeriodic() {
+  
+}
 
 void Robot::TestPeriodic() {}
 

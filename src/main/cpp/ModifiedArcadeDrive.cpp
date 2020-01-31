@@ -107,17 +107,7 @@ void ModifiedArcadeDrive::ArcadeDrive(double xSpeed, double zRotation){
          rightMotorOutput = xSpeed - zRotation;
       }
    }
-   setLeftMotor(leftMotorOutput);
-   setRightMotor(rightMotorOutput);
+   m_leftMotor->Set(leftMotorOutput);
+   m_rightMotor->Set(rightMotorOutput);
 
-}
-
-void ModifiedArcadeDrive::setLeftMotor(double value)
-{
-    m_leftMotor->Set(value);
-}
-
-void ModifiedArcadeDrive::setRightMotor(double value)
-{
-    m_rightMotor->Set(value);
 }

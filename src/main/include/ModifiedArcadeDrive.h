@@ -23,7 +23,4 @@ class ModifiedArcadeDrive {
   private:
     rev::CANSparkMax *m_leftMotor, *m_rightMotor;
 
-  private:
-    virtual void setLeftMotor(double value);
-    virtual void setRightMotor(double value);
 };
